@@ -84,7 +84,7 @@ A aplicação utiliza uma paleta de cores em tons pastéis, com ênfase em:
 
 ---
 
-Desenvolvido com ❤️ por Rodrigo e Lívia par Lívia
+Desenvolvido com ❤️ por Rodrigo e Lívia para Lívia
 
 
 
