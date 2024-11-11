@@ -1,0 +1,146 @@
+{
+	"resumo_exames": {
+		"total_exames": 53,
+		"urocultura_positiva": {
+			"quantidade": 5,
+			"porcentagem": 9.4,
+			"bacterias_encontradas": {
+				"Escherichia_coli": {
+					"porcentagem": 100,
+					"descricao": "Identificada como principal agente causador de infecções do trato urinário (ITUs) entre as uroculturas positivas."
+				}
+			}
+		},
+		"urocultura_negativa": {
+			"quantidade": 48,
+			"porcentagem": 90.6
+		},
+		"distribuicao_idade": [
+			{ "faixa_etaria": "18-25", "quantidade": 18, "porcentagem": 30.5 },
+			{ "faixa_etaria": "26-30", "quantidade": 14, "porcentagem": 23.7 },
+			{ "faixa_etaria": "31-35", "quantidade": 15, "porcentagem": 25.4 },
+			{ "faixa_etaria": "36-40", "quantidade": 6, "porcentagem": 10.2 }
+		],
+		"antibioticos_testados": [
+			"Amicacina",
+			"Ampicilina",
+			"Cefalexina",
+			"Cefoxitina",
+			"Ciprofloxacino",
+			"Amoxicilina + Ac. Clavulanico",
+			"Clindamicina",
+			"Cloranfenicol",
+			"Gentamicina",
+			"Nitrofurantoi\u0301na",
+			"Norfloxacina",
+			"Tetraciclina",
+			"Cefalotina",
+			"Ceftriaxona",
+			"Cefuroxima",
+			"Imipenem",
+			"Penicilina G",
+			"Sulfazotrim",
+			"Aztreonam",
+			"Sulfanamidas",
+			"Tobramicina"
+		],
+		"antibioticos": {
+			"resistentes": [
+				"Ampicilina",
+				"Cefalexina",
+				"Sulfazotrim",
+				"Penicilina G"
+			],
+			"sensiveis": [
+				"Amicacina",
+				"Cefoxitina",
+				"Ciprofloxacino",
+				"Amoxicilina + Ac. Clavulanico",
+				"Gentamicina",
+				"Nitrofurantoína",
+				"Norfloxacina",
+				"Ceftriaxona",
+				"Imipenem"
+			]
+		},
+		"resumo_urina": {
+			"aspecto": {
+				"ligeiramente_turvo": 60,
+				"turvo": 40
+			},
+			"glicose": {
+				"positivo": 20,
+				"negativo": 80
+			},
+			"nitrito": {
+				"positivo": 80,
+				"negativo": 20
+			},
+			"leucocitos": {
+				"numerosos": 60,
+				"raros": 20,
+				"alguns": 20
+			},
+			"bacterias": {
+				"numerosas_3_mais": 20,
+				"numerosas_4_mais": 40,
+				"aumentadas_3_mais": 20,
+				"incontaveis_5_mais": 20
+			}
+		},
+		"analise_parametros": {
+			"cor": {
+				"amarelo_claro": 33,
+				"palha": 16,
+				"citrino": 3,
+				"escuro": 1
+			},
+			"odor": "100% sui generis",
+			"aspecto": {
+				"ligeiramente_turvo": 12,
+				"turvo": 6,
+				"limpido": 35
+			},
+			"ph": {
+				"ph5": 9,
+				"ph6": 26,
+				"ph6.5": 14,
+				"ph7": 3,
+				"ph7.5": 1
+			},
+			"densidade": {
+				"1.010": 7,
+				"1.020": 9,
+				"1.025": 11,
+				"1.030": 3
+			},
+			"sangue": {
+				"negativo": 52,
+				"positivo": 1
+			},
+			"proteina": {
+				"negativo": 52,
+				"positivo": 1
+			},
+			"urobilinogenio": "53 normal",
+			"glicose": "3 positivo",
+			"corpos_cetonicos": "4 positivo",
+			"bilirrubina": "negativo",
+			"nitrito": "4 positivo",
+			"hemacias": "2 raros",
+			"celulas_epiteliais": {
+				"raras": 25,
+				"algumas": 4,
+				"numerosas": 4,
+				"ausentes": 20
+			},
+			"leucocitos": {
+				"raros": 22,
+				"piuria": 1
+			},
+			"bacterias": "21 raras",
+			"cristais": "100% ausentes",
+			"filamento_muco": "4"
+		}
+	}
+}
