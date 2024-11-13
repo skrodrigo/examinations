@@ -3,6 +3,24 @@ import pandas as pd
 import plotly.express as px
 import json
 
+# Configurações globais de estilo
+FONT_STYLE = {
+    'family': 'Times New Roman',
+    'size': 14,
+    'color': 'black'
+}
+
+# Configuração global para todos os gráficos Plotly
+import plotly.io as pio
+pio.templates["custom"] = pio.templates["plotly_white"]
+pio.templates["custom"].layout.update(
+    font=FONT_STYLE,
+    title_font=FONT_STYLE,
+    xaxis_title_font=FONT_STYLE,
+    yaxis_title_font=FONT_STYLE
+)
+pio.templates.default = "custom"
+
 # Carregando os dados JSON
 with open('data.json', encoding='utf-8') as f:
     data = json.load(f)
@@ -35,15 +53,43 @@ antibiotics_df.index = range(1, len(antibiotics_df) + 1)
 
 # Estilizar a tabela com cores
 def highlight_columns(x):
-    return pd.DataFrame('background-color: #FFB3BA', index=x.index, columns=x.columns)
+    return pd.DataFrame({
+        'background-color': '#FFB3BA',
+        'color': 'black',
+        'font-family': 'Times New Roman',
+        'font-size': '14px'
+    }, index=x.index, columns=x.columns)
 
 # Aplicar o estilo e mostrar a tabela
 styled_df = antibiotics_df.style.set_table_styles([
-    {'selector': 'th', 'props': [('background-color', '#FFB3BA')]},  # estilo para cabeçalhos
-    {'selector': 'td:first-child', 'props': [('background-color', '#FFB3BA')]}  # estilo para primeira coluna
+    {'selector': 'th', 'props': [
+        ('background-color', '#FFB3BA'),
+        ('color', 'black'),
+        ('font-family', 'Times New Roman'),
+        ('font-size', '14px')
+    ]},
+    {'selector': 'td', 'props': [
+        ('color', 'black'),
+        ('font-family', 'Times New Roman'),
+        ('font-size', '14px')
+    ]}
 ])
 st.table(styled_df)
 
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
 st.write("")
 st.write("")
 st.write("")
@@ -91,23 +137,28 @@ fig_resistant = px.bar(resistant_df,
 fig_resistant.update_layout(
     height=600,
     showlegend=False,
+    font=FONT_STYLE,
     xaxis=dict(
         title='Percentual (%)',
         gridcolor='lightgray',
-        range=[0, max(resistant_df['Percentual']) + 5]
+        range=[0, max(resistant_df['Percentual']) + 5],
+        title_font=FONT_STYLE,
+        tickfont=FONT_STYLE
     ),
     yaxis=dict(
-        title=''
+        title='',
+        tickfont=FONT_STYLE
     )
 )
 
 fig_resistant.update_traces(
     texttemplate='%{x:.1f}%',
     textposition='outside',
-    textfont=dict(size=12)
+    textfont=FONT_STYLE
 )
 
 st.plotly_chart(fig_resistant)
+st.write("")
 st.write("")
 st.write("")
 st.write("")
@@ -204,23 +255,31 @@ fig_sensitive = px.bar(sensitive_df,
 fig_sensitive.update_layout(
     height=600,
     showlegend=False,
+    font=FONT_STYLE,
     xaxis=dict(
         title='Percentual (%)',
         gridcolor='lightgray',
-        range=[0, max(sensitive_df['Percentual']) + 5]
+        range=[0, max(sensitive_df['Percentual']) + 5],
+        title_font=FONT_STYLE,
+        tickfont=FONT_STYLE
     ),
     yaxis=dict(
-        title=''
+        title='',
+        tickfont=FONT_STYLE
     )
 )
 
 fig_sensitive.update_traces(
     texttemplate='%{x:.1f}%',
     textposition='outside',
-    textfont=dict(size=12)
+    textfont=FONT_STYLE
 )
 
 st.plotly_chart(fig_sensitive)
+st.write("")
+st.write("")
+st.write("")
+st.write("")
 st.write("")
 st.write("")
 st.write("")
@@ -287,26 +346,35 @@ fig_positive = px.bar(positive_df, y='Parâmetro', x='Percentual',
 fig_positive.update_layout(
     showlegend=False,
     height=600,
+    font=FONT_STYLE,
     xaxis=dict(
         tickmode='linear',
         tick0=0,
         dtick=10,
         gridcolor='lightgray',
-        range=[0, 100]
+        range=[0, 100],
+        title_font=FONT_STYLE,
+        tickfont=FONT_STYLE
+    ),
+    yaxis=dict(
+        tickfont=FONT_STYLE
     ),
     hoverlabel=dict(
         bgcolor="white",
-        font_size=12,
+        font=FONT_STYLE
     )
 )
 
 fig_positive.update_traces(
     texttemplate='%{x}%',
     textposition='outside',
-    textfont=dict(size=12)
+    textfont=FONT_STYLE
 )
 
 st.plotly_chart(fig_positive)
+st.write("")
+st.write("")
+st.write("")
 st.write("")
 st.write("")
 st.write("")
@@ -381,9 +449,15 @@ fig_physical = px.bar(physical_df,
 fig_physical.update_layout(
     showlegend=False,
     height=600,
+    font=FONT_STYLE,
     xaxis=dict(
         gridcolor='lightgray',
-        range=[0, 100]  # Range de 0 a 100%
+        range=[0, 100],
+        title_font=FONT_STYLE,
+        tickfont=FONT_STYLE
+    ),
+    yaxis=dict(
+        tickfont=FONT_STYLE
     )
 )
 
@@ -391,10 +465,16 @@ fig_physical.update_layout(
 fig_physical.update_traces(
     texttemplate='%{x:.1f}%',
     textposition='outside',
-    textfont=dict(size=12)
+    textfont=FONT_STYLE
 )
 
 st.plotly_chart(fig_physical)
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
 st.write("")
 st.write("")
 st.write("")
@@ -460,20 +540,31 @@ fig_chemical = px.bar(chemical_df, y='Parâmetro', x='Percentual',
 fig_chemical.update_layout(
     showlegend=False,
     height=600,
+    font=FONT_STYLE,
     xaxis=dict(
-        range=[0, 110]  # Aumentado para 110% para garantir que todos os rótulos sejam visíveis
+        range=[0, 110],
+        title_font=FONT_STYLE,
+        tickfont=FONT_STYLE
     ),
-     # Aumenta a margem direita para acomodar os rótulos
+    yaxis=dict(
+        tickfont=FONT_STYLE
+    )
 )
 
 # Adiciona rótulos de valor em cada barra
 fig_chemical.update_traces(
     texttemplate='%{x:.1f}%',
     textposition='outside',
-    textfont=dict(size=12)
+    textfont=FONT_STYLE
 )
 
 st.plotly_chart(fig_chemical)
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
 st.write("")
 st.write("")
 st.write("")
@@ -524,12 +615,14 @@ fig_micro = px.pie(micro_df,
 
 fig_micro.update_layout(
     showlegend=True,
+    font=FONT_STYLE,
     legend=dict(
         orientation="v",
         yanchor="middle",
         y=0.5,
         xanchor="right",
-        x=1.1
+        x=1.1,
+        font=FONT_STYLE
     ),
     height=600
 )
