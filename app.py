@@ -25,18 +25,21 @@ pio.templates.default = "custom"
 with open('data.json', encoding='utf-8') as f:
     data = json.load(f)
 
-st.title('Análise')
+# st.title('Análise')
 
 # Definindo uma paleta de cores em tons pastéis
 cores = [
-  '#FAD0C9',  
-  '#F8BBD0',  
-  '#F7A7C8',  
-  '#FF86B3', 
+
+  '#CED4DA', 
+  '#ADB5BD', 
+  '#6C757D', 
+  '#495057', 
+  '#343A40', 
+  '#212529'  
 ]
 
 # 1. Tabela de Antibióticos
-st.header('Antibióticos Testados')
+# st.header('Antibióticos Testados')
 antibiotics_data = {
     'Antibiótico': data['resumo_exames']['antibioticos_testados'],
     'MCG/UN': [
@@ -54,7 +57,7 @@ antibiotics_df.index = range(1, len(antibiotics_df) + 1)
 # Estilizar a tabela com cores
 def highlight_columns(x):
     return pd.DataFrame({
-        'background-color': '#FFB3BA',
+        'background-color': '#CED4DA',
         'color': 'black',
         'font-family': 'Times New Roman',
         'font-size': '14px'
@@ -63,7 +66,7 @@ def highlight_columns(x):
 # Aplicar o estilo e mostrar a tabela
 styled_df = antibiotics_df.style.set_table_styles([
     {'selector': 'th', 'props': [
-        ('background-color', '#FFB3BA'),
+        ('background-color', '#CED4DA'),
         ('color', 'black'),
         ('font-family', 'Times New Roman'),
         ('font-size', '14px')
@@ -98,7 +101,7 @@ st.write("")
 st.write("")
 
 # Tabelas de Antibióticos Resistentes e Sensíveis
-st.subheader('Antibióticos Resistentes')
+# st.subheader('Antibióticos Resistentes')
 
 # Para os Antibióticos Resistentes
 resistant_data = {
@@ -130,8 +133,8 @@ resistant_df['Percentual'] = (resistant_df['Quantidade'] / total_resistant * 100
 fig_resistant = px.bar(resistant_df,
                       y='Antibiótico',
                       x='Percentual',
-                      title = 'Resistência do Patôgeno <i>Escherichia coli</i> aos Antibióticos',
-                      color_discrete_sequence=['#FFB3BA'],
+                      #title = 'Resistência do Patôgeno <i>Escherichia coli</i> aos Antibióticos',
+                      color_discrete_sequence=['#CED4DA'],
                       orientation='h')
 
 fig_resistant.update_layout(
@@ -186,9 +189,13 @@ st.write("")
 st.write("")
 st.write("")
 st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
 
 # Gráfico de Antibióticos Sensíveis
-st.subheader('Antibióticos Sensíveis')
+#st.subheader('Antibióticos Sensíveis')
 
 sensitive_data = {
     'Antibiótico': [
@@ -248,8 +255,8 @@ sensitive_df['Percentual'] = (sensitive_df['Quantidade'] / total_sensitive * 100
 fig_sensitive = px.bar(sensitive_df,
                       y='Antibiótico',
                       x='Percentual',
-                      title = 'Sensibilidade do Patôgeno <i>Escherichia coli</i> aos Antibióticos',
-                      color_discrete_sequence=['#FFB3BA'],
+                     # title = 'Sensibilidade do Patôgeno <i>Escherichia coli</i> aos Antibióticos',
+                      color_discrete_sequence=['#CED4DA'],
                       orientation='h')
 
 fig_sensitive.update_layout(
@@ -304,12 +311,16 @@ st.write("")
 st.write("")
 st.write("")
 st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
 
 # Adicionar um espaço após as tabelas
 st.write("")
 
 # 2. Gráfico de Uroculturas Positivas
-st.header('Análise de Uroculturas Positivas')
+#st.header('Análise de Uroculturas Positivas')
 urine_data = data['resumo_exames']['resumo_urina']
 
 # Criar DataFrame para uroculturas positivas com dados atualizados
@@ -338,9 +349,9 @@ positive_data = {
 positive_df = pd.DataFrame(positive_data)
 
 fig_positive = px.bar(positive_df, y='Parâmetro', x='Percentual',
-                     title='Parâmetros em Uroculturas Positivas',
+                     #title='Parâmetros em Uroculturas Positivas',
                      labels={'Percentual': 'Percentual (%)'},
-                     color_discrete_sequence=['#FFB3BA'],  # Rosa pastel
+                     color_discrete_sequence=['#CED4DA'],  # Rosa pastel
                      orientation='h')
 
 fig_positive.update_layout(
@@ -400,70 +411,76 @@ st.write("")
 st.write("")
 st.write("")
 st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
 
 # 3. Gráfico de Parâmetros Físicos
-st.header('Parâmetros Físicos')
+
+#st.header('Parâmetros Físicos')
 physical_params = data['resumo_exames']['analise_parametros']
 
 # Calcular porcentagens
 total_exames = 53
 
 # Para cor
-color_df = pd.DataFrame([
-    {'Parâmetro': k.replace('amarelo_claro', 'Amarelo Claro').replace('palha', 'Amarelo Palha').replace('citrino', 'Amarelo Citrino').replace('escuro', 'Amarelo Escuro').replace('_', ' ').title(),
-     'Quantidade': v,
-     'Percentual': (v/total_exames)*100}
-    for k, v in physical_params['cor'].items()
-])
+color_df = pd.DataFrame([{
+    'Parâmetro': k.replace('amarelo_claro', 'Amarelo Claro').replace('palha', 'Amarelo Palha').replace('citrino', 'Amarelo Citrino').replace('escuro', 'Amarelo Escuro').replace('_', ' ').title(),
+    'Quantidade': v,
+    'Percentual': round((v/total_exames)*100, 2)  # Arredondar para 2 casas decimais
+} for k, v in physical_params['cor'].items()])
 
 # Para densidade
-density_df = pd.DataFrame([
-    {'Parâmetro': f"Densidade {k}",
-     'Quantidade': v,
-     'Percentual': (v/total_exames)*100}
-    for k, v in physical_params['densidade'].items()
-])
+density_df = pd.DataFrame([{
+    'Parâmetro': f"Densidade {k}",
+    'Quantidade': v,
+    'Percentual': round((v/total_exames)*100, 2)  # Arredondar para 2 casas decimais
+} for k, v in physical_params['densidade'].items()])
 
 # Para aspecto
-appearance_df = pd.DataFrame([
-    {'Parâmetro': f"Aspecto {k.replace('ligeiramente_turvo', 'Ligeiramente Turvo').replace('turvo', 'Turvo').replace('limpido', 'Límpido').replace('_', ' ').title()}",
-     'Quantidade': v,
-     'Percentual': (v/total_exames)*100}
-    for k, v in physical_params['aspecto'].items()
-])
+appearance_df = pd.DataFrame([{
+    'Parâmetro': f"Aspecto {k.replace('ligeiramente_turvo', 'Ligeiramente Turvo').replace('turvo', 'Turvo').replace('limpido', 'Límpido').replace('_', ' ').title()}",
+    'Quantidade': v,
+    'Percentual': round((v/total_exames)*100, 2)  # Arredondar para 2 casas decimais
+} for k, v in physical_params['aspecto'].items()])
 
-# Combinar todos os parâmetros físicos
-physical_df = pd.concat([color_df, density_df, appearance_df])
+# Concatenar todos os DataFrames para exibição
+final_df = pd.concat([color_df, density_df, appearance_df])
 
-# Criar gráfico horizontal com range expandido
-fig_physical = px.bar(physical_df, 
-                     y='Parâmetro', 
-                     x='Percentual',
-                     title='Parâmetros Físicos da Urina',
-                     labels={'Percentual': 'Percentual (%)',
-                            'Parâmetro': ''},
-                     color='Parâmetro',
-                     color_discrete_sequence=['#FFB3BA'],
-                     orientation='h')
+# Gráfico de Parâmetros Físicos
+fig_physical = px.bar(final_df, 
+                      y='Parâmetro', 
+                      x='Percentual', 
+                     # title='Análise dos Parâmetros Físicos das Uroculturas',
+                      labels={'Percentual': 'Percentual (%)'},
+                      color_discrete_sequence=['#CED4DA'],  # Rosa pastel
+                      orientation='h')
 
 fig_physical.update_layout(
     showlegend=False,
     height=600,
     font=FONT_STYLE,
     xaxis=dict(
+        tickmode='linear',
+        tick0=0,
+        dtick=10,
         gridcolor='lightgray',
-        range=[0, 100],
+        range=[0, 80],
         title_font=FONT_STYLE,
         tickfont=FONT_STYLE
     ),
     yaxis=dict(
         tickfont=FONT_STYLE
+    ),
+    hoverlabel=dict(
+        bgcolor="white",
+        font=FONT_STYLE
     )
 )
 
-# Adiciona rótulos de valor em cada barra
 fig_physical.update_traces(
-    texttemplate='%{x:.1f}%',
+    texttemplate='%{x:.1f}%',  # Formatando para mostrar apenas 2 casas decimais
     textposition='outside',
     textfont=FONT_STYLE
 )
@@ -499,7 +516,7 @@ st.write("")
 st.write("")
 
 # 4. Gráfico de Parâmetros Químicos
-st.header('Parâmetros Químicos')
+#st.header('Parâmetros Químicos')
 chemical_data = {
     'Parâmetro': [
         'pH 5.0',
@@ -531,10 +548,10 @@ chemical_df = pd.DataFrame(chemical_data)
 chemical_df['Percentual'] = (chemical_df['Quantidade'] / total_exames * 100).round(2)
 
 fig_chemical = px.bar(chemical_df, y='Parâmetro', x='Percentual',
-                     title='Parâmetros Químicos da Urina',
+                     #title='Parâmetros Químicos da Urina',
                      labels={'Percentual': 'Percentual (%)'},
                      color='Parâmetro',
-                     color_discrete_sequence=['#FFB3BA'],
+                     color_discrete_sequence=['#CED4DA'],
                      orientation='h')
 
 fig_chemical.update_layout(
@@ -589,7 +606,7 @@ st.write("")
 st.write("")
 
 # 5. Gráfico de Parâmetros Microbiológicos (convertido para pizza)
-st.header('Parâmetros Microbiológicos')
+#st.header('Parâmetros Microbiológicos')
 micro_data = {
     'Parâmetro': [
         'Hemácias (Raras)',
@@ -610,7 +627,7 @@ micro_df['Percentual'] = (micro_df['Quantidade'] / total_exames * 100).round(2)
 fig_micro = px.pie(micro_df, 
                   values='Percentual',
                   names='Parâmetro',
-                  title='Parâmetros Microbiológicos da Urina',
+                 # title='Parâmetros Microbiológicos da Urina',
                   color_discrete_sequence=cores)
 
 fig_micro.update_layout(
@@ -621,7 +638,7 @@ fig_micro.update_layout(
         yanchor="middle",
         y=0.5,
         xanchor="right",
-        x=1.1,
+        x=1.4,
         font=FONT_STYLE
     ),
     height=600
