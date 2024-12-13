@@ -19,26 +19,25 @@ Este projeto é uma aplicação web desenvolvida com Streamlit para análise e v
 - Plotly Express
 - JSON
 
-## 📦 Estrutura do Projeto
-.
-├── app.py # Aplicação principal Streamlit
-├── data.json # Arquivo de dados
-└── README.md # Documentação
+## 🔧 Instalação e Execução
 
+1. Certifique-se de ter Python 3.x instalado em seu sistema
 
-## 🔧 Instalação
+2. Instale as bibliotecas necessárias usando pip:
+```bash
+pip install streamlit pandas plotly
+```
 
-1. Clone o repositório:
-git clone https://github.com/skrodrigo/examinations-with-python
+3. Para executar a aplicação, navegue até a pasta do projeto e use um dos comandos:
+```bash
+# Se estiver na pasta raiz do projeto:
+streamlit run src/app.py
 
-2. Instale as dependências:
+# Ou especifique o caminho completo:
+streamlit run [caminho_completo]/src/app.py
+```
 
-pip install -r requirements.txt
-
-3. Execute a aplicação:
-
-streamlit run app.py
-
+4. Após executar o comando, o Streamlit abrirá automaticamente seu navegador padrão com a aplicação
 
 ## 📊 Visualizações Disponíveis
 
@@ -68,6 +67,19 @@ streamlit run app.py
 - Bactérias
 - Células epiteliais
 
+## 💡 Dicas de Uso
+
+- A aplicação carregará automaticamente após executar o comando streamlit
+- Aguarde alguns segundos para que todos os gráficos sejam carregados
+- Use a barra lateral para navegar entre diferentes visualizações
+- Os gráficos são interativos - você pode passar o mouse sobre eles para ver mais detalhes
+
+## ❗ Requisitos do Sistema
+
+- Python 3.x
+- Navegador web moderno
+- Conexão com a internet (para carregar algumas dependências do Plotly)
+
 ## 📈 Dados
 
 Os dados são armazenados em formato JSON e incluem:
@@ -85,6 +97,3 @@ A aplicação utiliza uma paleta de cores em tons pastéis, com ênfase em:
 ---
 
 Desenvolvido com ❤️ por Rodrigo e Lívia para Lívia
-
-
-

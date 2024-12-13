@@ -47,8 +47,7 @@ antibiotics_data = {
         '-', '2mcg', '30mcg', '10mcg', '300mcg',
         '10mcg', '30mcg', '30mcg', '30mcg', '30mcg',
         '10mcg', '10UI', '25mcg', '-', '300mcg', '10mcg'
-    ],
-    'Patôgeno Isolado': ['E. coli'] * len(data['resumo_exames']['antibioticos_testados'])
+    ]
 }
 antibiotics_df = pd.DataFrame(antibiotics_data)
 # Adiciona coluna de índice começando em 1
@@ -69,36 +68,24 @@ styled_df = antibiotics_df.style.set_table_styles([
         ('background-color', '#CED4DA'),
         ('color', 'black'),
         ('font-family', 'Times New Roman'),
-        ('font-size', '14px')
+        ('font-size', '16px'),
+        ('border', 'none'),
+        ('padding', '8px')
     ]},
     {'selector': 'td', 'props': [
         ('color', 'black'),
         ('font-family', 'Times New Roman'),
-        ('font-size', '14px')
+        ('font-size', '14px'),
+        ('border', 'none'),
+        ('padding', '8px')
+    ]},
+    {'selector': 'table', 'props': [
+        ('border-collapse', 'collapse'),
+        ('border', 'none'),
+        ('margin', '0px')
     ]}
 ])
 st.table(styled_df)
-
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
 
 # Tabelas de Antibióticos Resistentes e Sensíveis
 # st.subheader('Antibióticos Resistentes')
@@ -161,38 +148,6 @@ fig_resistant.update_traces(
 )
 
 st.plotly_chart(fig_resistant)
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
 
 # Gráfico de Antibióticos Sensíveis
 #st.subheader('Antibióticos Sensíveis')
@@ -283,41 +238,6 @@ fig_sensitive.update_traces(
 )
 
 st.plotly_chart(fig_sensitive)
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-
-# Adicionar um espaço após as tabelas
-st.write("")
 
 # 2. Gráfico de Uroculturas Positivas
 #st.header('Análise de Uroculturas Positivas')
@@ -326,24 +246,28 @@ urine_data = data['resumo_exames']['resumo_urina']
 # Criar DataFrame para uroculturas positivas com dados atualizados
 positive_data = {
     'Parâmetro': [
+        'Nitrito (Positivo)',
+        'Nitrito (Negativo)',
+        'Leucócitos (Positivos)',
+        'Leucócitos (Negativos)',
+        'Aspecto (Turvo)',
+        'Aspecto (Ligeiramente Turvo)',
         'Bactérias (Incontáveis 5+)',
         'Bactérias (Numerosas 4+)',
         'Bactérias (Numerosas 3+)',
         'Bactérias (Aumentadas 3+)',
-        'Leucócitos (Numerosos)',
-        'Aspecto (Turvo)',
-        'Aspecto (Ligeiramente Turvo)',
-        'Nitrito (Positivo)'
     ],
     'Percentual': [
+        urine_data['nitrito']['positivo'],
+        20,  # Nitrito Negativo 20%
+        urine_data['leucocitos']['numerosos'],
+        40,  # Leucócitos Negativos 40%
+        urine_data['aspecto']['turvo'],
+        urine_data['aspecto']['ligeiramente_turvo'],
         urine_data['bacterias']['incontaveis_5_mais'],
         urine_data['bacterias']['numerosas_4_mais'],
         urine_data['bacterias']['numerosas_3_mais'],
         urine_data['bacterias']['aumentadas_3_mais'],
-        urine_data['leucocitos']['numerosos'],
-        urine_data['aspecto']['turvo'],
-        urine_data['aspecto']['ligeiramente_turvo'],
-        urine_data['nitrito']['positivo']
     ]
 }
 positive_df = pd.DataFrame(positive_data)
@@ -383,38 +307,6 @@ fig_positive.update_traces(
 )
 
 st.plotly_chart(fig_positive)
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
 
 # 3. Gráfico de Parâmetros Físicos
 
@@ -435,7 +327,7 @@ color_df = pd.DataFrame([{
 density_df = pd.DataFrame([{
     'Parâmetro': f"Densidade {k}",
     'Quantidade': v,
-    'Percentual': round((v/total_exames)*100, 2)  # Arredondar para 2 casas decimais
+    'Percentual': round((v/sum(physical_params['densidade'].values()))*100, 2)  # Calcular percentual do total de densidades
 } for k, v in physical_params['densidade'].items()])
 
 # Para aspecto
@@ -486,34 +378,6 @@ fig_physical.update_traces(
 )
 
 st.plotly_chart(fig_physical)
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
 
 # 4. Gráfico de Parâmetros Químicos
 #st.header('Parâmetros Químicos')
@@ -524,13 +388,17 @@ chemical_data = {
         'pH 6.5',
         'pH 7.0',
         'pH 7.5',
+        'Proteína (Positivo)',
         'Proteína (Negativo)',
         'Glicose (Positivo)',
+        'Glicose (Negativo)',
         'Urobilinogênio (Normal)',
         'Bilirrubina (Negativo)',
         'Corpos Cetônicos (Positivo)',
+        'Corpos Cetônicos (Negativo)',
         'Cristais (Ausentes)',
-        'Filamento de Muco'
+        'Filamento de Muco (Positivo)',
+        'Filamento de Muco (Negativo)'
     ],
     'Quantidade': [
         physical_params['ph']['ph5'],
@@ -538,8 +406,17 @@ chemical_data = {
         physical_params['ph']['ph6.5'],
         physical_params['ph']['ph7'],
         physical_params['ph']['ph7.5'],
+        1,
         physical_params['proteina']['negativo'],
-        3, 53, 53, 4, 53, 4
+        3,
+        50,  # Glicose negativa (53 - 3 positivos)
+        53,
+        53,
+        4,
+        49,  # Corpos cetônicos negativos (53 - 4 positivos)
+        53,
+        4,
+        49   # Filamento de muco negativos (53 - 4 positivos)
     ]
 }
 chemical_df = pd.DataFrame(chemical_data)
@@ -559,13 +436,14 @@ fig_chemical.update_layout(
     height=600,
     font=FONT_STYLE,
     xaxis=dict(
-        range=[0, 110],
+        range=[0, 116],
         title_font=FONT_STYLE,
         tickfont=FONT_STYLE
     ),
     yaxis=dict(
         tickfont=FONT_STYLE
-    )
+    ),
+
 )
 
 # Adiciona rótulos de valor em cada barra
@@ -576,34 +454,6 @@ fig_chemical.update_traces(
 )
 
 st.plotly_chart(fig_chemical)
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
-st.write("")
 
 # 5. Gráfico de Parâmetros Microbiológicos (convertido para pizza)
 #st.header('Parâmetros Microbiológicos')
@@ -638,13 +488,10 @@ fig_micro.update_layout(
         yanchor="middle",
         y=0.5,
         xanchor="right",
-        x=1.4,
-        font=FONT_STYLE
+        x=1.6,
+        font=dict(size=18)
     ),
     height=600
 )
 
 st.plotly_chart(fig_micro)
-st.write("")
-st.write("")
-st.write("")
